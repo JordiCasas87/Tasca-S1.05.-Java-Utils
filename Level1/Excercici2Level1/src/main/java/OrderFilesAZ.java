@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -9,44 +8,29 @@ import java.util.ArrayList;
 
     public class OrderFilesAZ {
 
-        static ArrayList <Path> totalList = new ArrayList<>();
-
-        public static void readAndAdd(Path ruta1) {
+        public static void readAddOrderAZ(Path ruta1) {
+            ArrayList <Path> firstOrder = new ArrayList<>();
 
             try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
+                for (Path actualFile : content){
+                    firstOrder.add(actualFile);
+                }
+                firstOrder.sort(null);
 
-                for (Path actualFile : content) {
+                for (Path actualFile : firstOrder) {
                     if (Files.isRegularFile(actualFile)) {
-                        totalList.add(actualFile);
+                        System.out.println(actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->");
+
 
                     } else if (Files.isDirectory(actualFile)) {
-                        totalList.add(actualFile);
-                        readAndAdd(actualFile);
+                        System.out.println(actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->");
+
+                        readAddOrderAZ(actualFile);
                     }
                 }
 
             } catch (IOException e) {
                 System.out.println("Error al leer la carpeta." + e.getMessage());
-            }
-        }
-
-
-        public static void readAndOrder (){
-            try {
-                System.out.println("\nOrder A to Z \n");
-                totalList.sort(null);
-
-                for (Path order : totalList) {
-                    if (Files.isRegularFile(order)) {
-                        System.out.println(order.getFileName() + "--- " + Files.getLastModifiedTime(order) + " <-F->");
-                    } else if (Files.isDirectory(order)) {
-                        System.out.println(order.getFileName() + "---"+  Files.getLastModifiedTime(order) + " <-D->");
-                    }
-
-                }
-                System.out.println("El tamaño es: " + totalList.size());
-            }catch (IOException e){
-                System.out.println("Error" + e.getMessage());
             }
         }
 

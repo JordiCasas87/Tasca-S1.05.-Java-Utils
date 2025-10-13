@@ -7,12 +7,8 @@ public class MainApp {
 
         Path ruta = Paths.get("/Users/jcasas87/Desktop/Doc Varios 2025");
 
-        OrderFilesAZ.readAndAdd(ruta);
-        OrderFilesAZ.readAndOrder();
-
+        OrderFilesAZ.readAddOrderAZ(ruta);
 
     }
-
-
 
 }
