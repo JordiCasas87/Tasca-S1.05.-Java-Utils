@@ -1,20 +1,20 @@
+package model;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
     public class OrderFilesAZWritter {
 
         static ArrayList<String> lines = new ArrayList<>();
 
-        public static void readAddOrderAZWritter(Path ruta1, Path ruta2) {
+        public static void readAddOrderAZWritter(Path inputDirectory, Path outputWritteFile) {
 
             ArrayList<Path> firstOrder = new ArrayList<>();
 
-            try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
+            try (DirectoryStream<Path> content = Files.newDirectoryStream(inputDirectory)) {
                 for (Path actualFile : content) {
                     firstOrder.add(actualFile);
                 }
@@ -30,7 +30,7 @@ import java.util.ArrayList;
                         String line = actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->";
                         lines.add(line);
 
-                        readAddOrderAZWritter(actualFile, ruta2);
+                        readAddOrderAZWritter(actualFile, outputWritteFile);
                     }
                 }
 
@@ -39,7 +39,7 @@ import java.util.ArrayList;
             }
 
             try {
-                Files.write(ruta2, lines);
+                Files.write(outputWritteFile, lines);
             } catch (IOException e) {
                 System.out.println("Error de escritura " + e.getMessage());
             }
