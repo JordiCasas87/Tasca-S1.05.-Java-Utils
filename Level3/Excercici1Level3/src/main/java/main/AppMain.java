@@ -1,7 +1,5 @@
 
-
 package main;
-
 import model.EncryptClass;
 import java.nio.file.Path;
 
