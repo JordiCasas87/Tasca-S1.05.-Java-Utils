@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 
                     } else if (Files.isDirectory(actualFile)) {
-                        String line = actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->";
+                        String line = "     "+ actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->";
                         lines.add(line);
 
                         readAddOrderAZWritter(actualFile, outputWritteFile);

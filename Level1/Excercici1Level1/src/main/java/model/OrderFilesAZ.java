@@ -1,3 +1,5 @@
+package model;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -7,21 +9,15 @@ import java.util.ArrayList;
 
 public class OrderFilesAZ {
 
-    /*- Exercici 1
-Crea una classe que llisti alfabèticament el contingut d'un directori rebut per paràmetre.
-    */
-
     public OrderFilesAZ() {
     }
 
+    public static void readAndOrder(Path ruta) {
 
-    public static void readAndOrder(Path ruta1) {
-
-        try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
+        try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta)) {
             ArrayList<Path> orderfiles = new ArrayList<>();
 
             for (Path actualFile : content) {
-                System.out.println(actualFile.getFileName());
                 orderfiles.add(actualFile);
             }
             System.out.println("\nOrder a to Z \n");

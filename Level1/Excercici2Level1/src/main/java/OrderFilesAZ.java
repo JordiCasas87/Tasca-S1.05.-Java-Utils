@@ -8,22 +8,24 @@ import java.util.ArrayList;
 
     public class OrderFilesAZ {
 
-        public static void readAddOrderAZ(Path ruta1) {
+        public static void readAddOrderAZ(Path ruta) {
+
             ArrayList <Path> firstOrder = new ArrayList<>();
 
-            try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
+            try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta)) {
                 for (Path actualFile : content){
                     firstOrder.add(actualFile);
                 }
                 firstOrder.sort(null);
 
                 for (Path actualFile : firstOrder) {
+
                     if (Files.isRegularFile(actualFile)) {
-                        System.out.println(actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->");
+                        System.out.println("      "+actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->");
 
 
                     } else if (Files.isDirectory(actualFile)) {
-                        System.out.println(actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->");
+                        System.out.println("" + actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->");
 
                         readAddOrderAZ(actualFile);
                     }

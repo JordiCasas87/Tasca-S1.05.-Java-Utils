@@ -12,9 +12,9 @@ public class OrderFilesAZReaderSerial {
 
     static ArrayList<String> lines = new ArrayList<>();
 
-    public static void readAddOrderAZWritter(Path ruta1) {
+    public static void readAddOrderAZWritter(Path ruta1 ,Path ruta2) {
 
-        Path pathFileWritte = Paths.get("/Users/jcasas87/Desktop/Filelist.txt");
+        Path pathFileWritte = ruta2;
         ArrayList<Path> firstOrder = new ArrayList<>();
 
         try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
@@ -25,7 +25,7 @@ public class OrderFilesAZReaderSerial {
 
             for (Path actualFile : firstOrder) {
                 if (Files.isRegularFile(actualFile)) {
-                    String line = actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->";
+                    String line = "       "+ actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->";
                     lines.add(line);
 
 
@@ -33,7 +33,7 @@ public class OrderFilesAZReaderSerial {
                     String line = actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->";
                     lines.add(line);
 
-                    readAddOrderAZWritter(actualFile);
+                    readAddOrderAZWritter(actualFile, ruta2);
                 }
             }
 
@@ -49,20 +49,20 @@ public class OrderFilesAZReaderSerial {
     }
 
 
-    public static void fileReader(Path path) {
+    public static void fileReader ( Path path){
         try {
             List<String> linesFile = Files.readAllLines(path);
-            for (String lines : linesFile) {
+            for (String lines : linesFile){
                 System.out.println(lines);
             }
 
-        } catch (IOException e) {
+        }catch (IOException e){
             System.out.println("Error de lectura del archivo de texto" + e.getMessage());
         }
     }
 
-    public static void serialize(UserGame user) {
-        try (FileOutputStream fileToSerial = new FileOutputStream("/Users/jcasas87/Desktop/SerialGamer.ser");
+    public static void serialize(UserGame user, Path ruta4) {
+        try (FileOutputStream fileToSerial = new FileOutputStream (ruta4.toFile());
              ObjectOutputStream fileToSerialOut = new ObjectOutputStream(fileToSerial)) {
 
             fileToSerialOut.writeObject(user);
@@ -74,9 +74,9 @@ public class OrderFilesAZReaderSerial {
 
     }
 
-    public static void deserialize() {
-        try (  FileInputStream fileIn = new FileInputStream("/Users/jcasas87/Desktop/SerialGamer.ser");
-               ObjectInputStream objectIn = new ObjectInputStream(fileIn)){
+    public static void deserialize(Path ruta4) {
+        try (FileInputStream fileIn = new FileInputStream(ruta4.toFile());
+             ObjectInputStream objectIn = new ObjectInputStream(fileIn)){
 
             UserGame userDeserialized = (UserGame) objectIn.readObject();
             System.out.println("objeto des serializado correctamente");

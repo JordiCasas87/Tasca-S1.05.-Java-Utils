@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +9,9 @@ public class OrderFilesAZReader {
 
     static ArrayList<String> lines = new ArrayList<>();
 
-    public static void readAddOrderAZWritter(Path ruta1) {
+    public static void readAddOrderAZWritter(Path ruta1 ,Path ruta2) {
 
-        Path pathFileWritte = Paths.get("/Users/jcasas87/Desktop/Filelist.txt");
+        Path pathFileWritte = ruta2;
         ArrayList<Path> firstOrder = new ArrayList<>();
 
         try (DirectoryStream<Path> content = Files.newDirectoryStream(ruta1)) {
@@ -23,7 +22,7 @@ public class OrderFilesAZReader {
 
             for (Path actualFile : firstOrder) {
                 if (Files.isRegularFile(actualFile)) {
-                    String line = actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->";
+                    String line = "       "+ actualFile.getFileName() + "--- " + Files.getLastModifiedTime(actualFile) + " <-F->";
                     lines.add(line);
 
 
@@ -31,7 +30,7 @@ public class OrderFilesAZReader {
                     String line = actualFile.getFileName() + "---" + Files.getLastModifiedTime(actualFile) + " <-D->";
                     lines.add(line);
 
-                    readAddOrderAZWritter(actualFile);
+                    readAddOrderAZWritter(actualFile, ruta2);
                 }
             }
 
