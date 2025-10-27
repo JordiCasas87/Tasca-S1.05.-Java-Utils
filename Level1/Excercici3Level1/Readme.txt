@@ -13,7 +13,7 @@ Exercici3Level1/
  │    ├── main/
  │    │    └── java/
  │    │         ├── MainApp.java
- │    │         └── OrderFilesAZWritter.java
+ │    │         └── model.OrderFilesAZWritter.java
  │    └── test/
  │         └── java/
  ├── pom.xml
@@ -47,7 +47,7 @@ Exercici3Level1/
 3. **Compilar los archivos fuente (.java):**
 
    ```bash
-   javac MainApp.java OrderFilesAZWritter.java
+   javac MainApp.java model.OrderFilesAZWritter.java
    ```
 
    Esto generará los archivos `.class` en la misma carpeta.

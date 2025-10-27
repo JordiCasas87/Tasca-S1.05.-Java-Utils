@@ -1,15 +1,20 @@
+package model;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class OrderFilesAZWritter {
 
     static ArrayList<String> lines = new ArrayList<>();
 
-    public static void readAddOrderAZWritter(Path ruta1 ,Path ruta2) {
+    public static ArrayList<String> getLines() {
+        return lines;
+    }
+
+    public static void readAddOrderAZWritter(Path ruta1 , Path ruta2) {
 
         Path pathFileWritte = ruta2;
         ArrayList<Path> firstOrder = new ArrayList<>();

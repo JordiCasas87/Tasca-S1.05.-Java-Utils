@@ -31,6 +31,7 @@ public class MainApp {
                     System.out.println("Adios!");
                     break;
                 case 1:
+                    OrderFilesAZReader.getLines().clear();
                     System.out.println("Introduce la ruta de la carpeta que quieres ordenar: ");
                     String rutaUser = sc.nextLine();
 
@@ -47,6 +48,11 @@ public class MainApp {
                         rutaUserWrite = rutaUserWrite.substring(1, rutaUserWrite.length() - 1);
                     } else if (rutaUserWrite.startsWith("'") && rutaUserWrite.endsWith("'")) {
                         rutaUserWrite = rutaUserWrite.substring(1, rutaUserWrite.length() - 1);
+                    }
+
+                    if (!rutaUserWrite.endsWith(".txt")) {
+                        System.out.println("Debes de guardar en un archivo .txt");
+                        return;
                     }
 
                     System.out.println("Ruta introducida: '" + rutaUser + "'");

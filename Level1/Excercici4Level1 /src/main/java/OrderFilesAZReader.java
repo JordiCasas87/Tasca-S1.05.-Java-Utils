@@ -9,7 +9,11 @@ public class OrderFilesAZReader {
 
     static ArrayList<String> lines = new ArrayList<>();
 
-    public static void readAddOrderAZWritter(Path ruta1 ,Path ruta2) {
+    public static ArrayList<String> getLines() {
+        return lines;
+    }
+
+    public static void readAddOrderAZWritter(Path ruta1 , Path ruta2) {
 
         Path pathFileWritte = ruta2;
         ArrayList<Path> firstOrder = new ArrayList<>();
